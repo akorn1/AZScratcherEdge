@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AZ Scratcher Program</title>
+<style>
+.pbutton {
+    background-color: darkblue;
+    width:90px;
+    border: darkblue;
+    color: white;
+    padding: 8px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 5px 25px;
+    cursor: pointer;
+}
+.title {
+    text-align: center;
+    color: black;
+}
+.subtitle {
+    text-align:left;
+}
+.intro {
+    text-align: center;
+}
+.paragraph {
+    text-align:left;
+}
+.button_pane {
+    margin: auto;
+    width: 100%;
+}
+.button_holder {
+    display: inline-block;
+    margin: auto;
+    width: 10%;
+}
+.select {
+    border : black;
+    color : darkblue;
+    padding: 8px 4px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 5px 25px;
+    cursor: pointer;
+}
+
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  text-align: right;
+  display: inline-block;
+}
+
+/* Dropdown Button */
+.drop {
+  background-color: #0d0479;
+  text-align:right;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  margin: 32px;
+  border: none;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  text-align: left;
+  background-color: #f1f1f1;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd;}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+</style>
+</head>
+<body>
+<h1 class="title"> AZ Scratcher Stats </h1>
+<p class="intro">Intro</p>
+</div>
+<div class="button-pane">
+    <div class="button_holder">
+        <form action="http://akornasksyou.com/Scratchers" method="GET">
+            <input type="hidden" name="sort" value="pev">
+            <button class="pbutton">All</button>
+        </form>
+    </div>
+    <div class="button_holder">
+<form action="http://akornasksyou.com/Scratchers" method="GET">
+    <input type="hidden" name="price" value="50">
+    <input type="hidden" name="sort" value="pev">
+    <button class="pbutton">$50</button>
+</form>
+</div>
+<div class="button_holder">
+<form action="http://akornasksyou.com/Scratchers" method="GET">
+    <input type="hidden" name="price" value="30">
+    <input type="hidden" name="sort" value="pev">
+    <button class="pbutton">$30</button>
+</form>
+</div>
+<div class="button_holder">
+<form action="http://akornasksyou.com/Scratchers" method="GET">
+    <input type="hidden" name="price" value="20">
+    <input type="hidden" name="sort" value="pev">
+    <button class="pbutton">$20</button>
+</form>
+</div>
+<div class="button_holder">
+<form action="http://akornasksyou.com/Scratchers" method="GET">
+    <input type="hidden" name="price" value="10">
+    <input type="hidden" name="sort" value="pev">
+    <button class="pbutton">$10</button>
+</form>
+</div>
+<div class="button_holder">
+<form action="http://akornasksyou.com/Scratchers" method="GET">
+    <input type="hidden" name="price" value="5">
+    <input type="hidden" name="sort" value="pev">
+    <button class="pbutton">$5</button>
+</form>
+</div>
+<div class="button_holder">
+<form action="http://akornasksyou.com/Scratchers" method="GET">
+    <input type="hidden" name="price" value="3">
+    <input type="hidden" name="sort" value="pev">
+    <button class="pbutton">$3</button>
+</form>
+</div>
+<div class="button_holder">
+<form action="http://akornasksyou.com/Scratchers" method="GET">
+    <input type="hidden" name="price" value="2">
+    <input type="hidden" name="sort" value="pev">
+    <button class="pbutton">$2</button>
+</form>
+</div>
+<div class="button_holder">
+<form action="http://akornasksyou.com/Scratchers" method="GET">
+    <input type="hidden" name="price" value="1">
+    <input type="hidden" name="sort" value="pev">
+    <button class="pbutton">$1</button>
+</form>
+</div>
+</div>
+
+<div class="dropdown">
+  <button class="drop">Sort For...</button>
+  <div class="dropdown-content">
+    <script>
+        function sort_scratchers(pricetag) {
+            var qstring = new URLSearchParams(window.location.search)
+            qstring.set("sort", pricetag)
+            window.location.search = qstring.toString()
+        }
+    </script>
+    <a onclick="sort_scratchers('pev')">Best Scratchers</a>
+    <a onclick="sort_scratchers('dev')">Cheapest per Ticket</a>
+    <a onclick="sort_scratchers('var')">True Degenerates</a>
+  </div>
+</div>
+<div class="table_holder">
+    <table class="scratch_table">
+        <thead>
+          <th>Name</th>
+          <th>Price ($)</th>
+          <th>Overall Odds (1 in __)</th>
+          <th>Expected Value (%)</th>
+          <th>Expected Value ($)</th>
+          <th>Variance</th>
+        </thead>
+        <tbody id="scratcher_data"></tbody>
+      </table>
+</div>
+<script>
+    const items = [{name:'#1405 wild cherry doubler', 1, 4.44, 0.5447270215609984, -0.45527297843900166, 9.822211618285559}, {'#1448 money bags', 1, 4.44, 0.5708547175922377, -0.4291452824077623, 9.045698634822367}, {'#1417 fruit explosion', 3, 3.74, 0.5893800536524618, -1.2318598390426145, 1231.5938124792817}, {'#1410 red hot 7s', 2, 3.97, 0.5898064393969733, -0.8203871212060533, 263.8938558055243}, {'#1370 crossword', 2, 3.67, 0.5933851974455919, -0.8132296051088161, 397.95238505253553}, {'#1422 triple', 2, 4.15, 0.6041611654089487, -0.7916776691821027, 278.1759703479079}, {'#1423 100 stacked', 2, 4.27, 0.6118519214959669, -0.7762961570080663, 357.15668965481905}, {'#1394 money ball bingo', 2, 3.73, 0.6121614353451599, -0.7756771293096802, 212.87281454799282), ('#1439 bonus word crossword', 3, 3.52, 0.6176871706117885, -1.1469384881646345, 1054.5754008810027), ('#1433 10x', 2, 4.29, 0.621080745577684, -0.7578385088446319, 353.6529414555504), ('#1446 double dollars', 2, 4.28, 0.6242685764852811, -0.7514628470294379, 394.6489606091299), ('#1445 unlock the loot', 3, 3.8, 0.6275538252778173, -1.1173385241665479, 1662.749454361287), ('#1441 double bingo', 2, 3.63, 0.6380241358157469, -0.7239517283685062, 234.20767117329078), ('#1406 10 000 blowout', 10, 3.45, 0.6473978335415478, -3.526021664584522, 2995.2630456560496), ('#1403 50 000 lucky dog', 5, 3.54, 0.664846594884947, -1.675767025575265, 8239.553442647662), ('#1434 20x', 5, 3.81, 0.6709638033955263, -1.6451809830223685, 14794.172120308878), ('#1424 bingo bash', 5, 3.47, 0.6714818865077723, -1.6425905674611385, 8082.64988909092), ('#1395 secret agent crossword', 5, 3.48, 0.6721480455730846, -1.6392597721345772, 7860.129676000133), ('#1449 its all cash', 5, 3.77, 0.6753973571273388, -1.6230132143633058, 10413.129122292708), ('#1447 catan', 5, 3.5, 0.6781719380545155, -1.6091403097274224, 6332.096908978674), ('#1444 cactus crossword', 5, 3.43, 0.6798797131903309, -1.6006014340483454, 7046.684039020409), ('#1452 cash plus', 5, 3.56, 0.681214497867192, -1.5939275106640398, 7886.241796525374), ('#1414 win 100 000', 10, 3.57, 0.683064302878154, -3.1693569712184604, 52802.94366798136), ('#1456 loteria grande', 5, 3.42, 0.6839446429257408, -1.5802767853712962, 8178.137551382983), ('#1413 jokers wild', 5, 3.7, 0.6862168630929709, -1.5689156845351455, 12183.15756822173), ('#1451 spicy hot cash', 10, 3.56, 0.71775067666777, -2.8224932333223, 28575.57805388406), ('#1442 triple red 7s', 10, 3.48, 0.7232611928710819, -2.7673880712891807, 35091.498481860006), ('#1435 50x', 10, 3.34, 0.7242653484935303, -2.7573465150646976, 44217.36390756651), ('#1443 cash craze crossword', 10, 3.42, 0.7297643743538413, -2.702356256461586, 42952.176431451924), ('#1450 bonus bucks', 10, 3.34, 0.7303279446398907, -2.696720553601093, 36872.64530263759), ('#1436 100x', 20, 3.04, 0.7322306290882981, -5.355387418234039, , 10, 3.45, 0.7791320491458289, -2.208679508541711, 129056.79340713305), ('#1402 24k gold', 20, 3.09, 0.7877406761895533, -4.245186476208933, 1464456.7582856922), ('#1400 230 million cash explosion', 20, 3.09, 0.7922796912865046, -4.1544061742699085, 3372991.9162120456), ('#1431 millionaire extraordinaire', 30, 2.63, 0.8204424768453533, -5.386725694639401, 2315583.810885649), ('#1440 500x fortune', 50, 2.55, 0.8214155185671065, -8.929224071644677, 19740337.24370225), ('#1401 set for life', 50, 2.18, 0.8241771424324615, -8.791142878376922, 26311390.455541555), ('#1455 million dollar crossword', 30, 2.3, 0.8397589422545458, -4.807231732363623, 3515713.81612255), ('#1360 500x', 50, 2.51, 0.8663059997140462, -6.68470001429769, 36028608.95131186)]]
+</script>
+<h2 class="subtitle"> DISCLAIMER </h2>
+	<p class="paragraph"> *Talk about innacuracies inherent in process* </p>
+<h2 class="subtitle"> Explanation </h2>
+	<p class="paragraph"> *Talk about making this program*</p>
+</body>
+</html>
